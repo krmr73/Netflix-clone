@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "../../axios";
-import { requests } from '../../request';
 
 export type Movie = {
     id: number;
@@ -11,22 +10,21 @@ export type Movie = {
 
 export const useProps = (fetchUrl: string) => {
     const [movies, setMovies] = useState<Movie[]>([]);
+    console.log(fetchUrl);
 
     useEffect(() => {
         async function fetchData() {
             const request = await axios.get(fetchUrl);
-
-            const movies = request.data.results.map((movie: Movie) => ({
+            const moviesData = request.data.results.map((movie: Movie) => ({
                 id: movie.id,
                 name: movie.name,
                 poster_path: movie.poster_path,
                 backdrop_path: movie.backdrop_path
             }));
-            setMovies(movies);
-            return request;
+            setMovies(moviesData);
         }
         fetchData();
     }, [fetchUrl]);
 
-    return movies;
+    return { movies };
 }
