@@ -1,10 +1,12 @@
 import { requests } from "./request";
 import { Row } from "./components/Row";
+import { Banner } from "./components/Banner";
 
 function App() {
   return (
     <div className="App">
-     <Row
+      <Banner />
+      <Row
         title="NETFLIX ORIGUINALS"
         fetchUrl={requests.fetchNetflixOriginals}
         isLargeRow
